@@ -51,7 +51,7 @@ def choixUtilisateur(somme_utilisateur, actions_utilisateur, date):
 
 def main():
     somme_utilisateur = 1000
-    actions_utilisateur = {"Total": 0, "Apple": 0, "Bnp_Paribas": 0}
+    actions_utilisateur = {company : 0 for company in companies}
     window = cm.slice_date("2020-01-01", "2020-02-01", df)
     for i in range(10):
         #afficher fenetre
@@ -66,4 +66,5 @@ def main():
 # actions_utilisateur = {"Apple": 10, "Total": 20, "Bnp_Paribas": 5}
 # choixUtilisateur(1000, actions_utilisateur, "date")
 
-main()
+if __name__ == "__main__":
+    main()
