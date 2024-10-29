@@ -30,3 +30,12 @@ def slice_date(beginning, ending, df): #format should be "2024-10-28"
     end = pd.to_datetime(ending, format ="%Y-%m-%d")
     result = df[(df.index > beg) & (df.index < end)]
     return result
+# %%
+def advance_window(window, df, nb):
+    end = window.index[0]
+    start = window.index[-1]
+    end_index = df.index.get_loc(end)
+    start_index = df.index.get_loc(start)
+    result = df.iloc[(end_index - nb) : (start_index - nb + 1)]
+    return result
+# %%
