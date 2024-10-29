@@ -24,3 +24,9 @@ def load_csv(name):
     df["Low"] = df["Low"].str.replace("$", "").astype(float)
     df["Close/Last"] = df["Close/Last"].str.replace("$", "").astype(float)
     return df
+# %%
+def slice_date(beginning, ending, df): #format should be "2024-10-28"
+    beg = pd.to_datetime(beginning, format ="%Y-%m-%d")
+    end = pd.to_datetime(ending, format ="%Y-%m-%d")
+    result = df[(df.index > beg) & (df.index < end)]
+    return result
