@@ -2,9 +2,9 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import common_kataevskii as cm
 
-df = cm.load_csv("bourse/AAOPL.csv")
+df = cm.load_csv("bourse/AAPL.csv")
 
-liste_df = [df]
+liste_df = {"Apple" : df}
 
 def recupererAction(companie, date, liste_df):
     return liste_df[companie].loc[date, "Open"]
@@ -52,15 +52,18 @@ def choixUtilisateur(somme_utilisateur, actions_utilisateur, date):
 def main():
     somme_utilisateur = 1000
     actions_utilisateur = {"Total": 0, "Apple": 0, "Bnp_Paribas": 0}
-    window = cm.slice_date("2020-01-01", "2020-02-01")
+    window = cm.slice_date("2020-01-01", "2020-02-01", df)
     for i in range(10):
         #afficher fenetre
         window.Open.plot()
+        plt.show()
         #choix utilisateur
-        date = window.indices[0]
-        choixUtilisateur(somme_utilisateur, actions_utilisateur, date)
+        date = window.index[0]
+        somme_utilisateur, actions_utilisateur = choixUtilisateur(somme_utilisateur, actions_utilisateur, date)
         #augmenter la date
         window = cm.advance_window(window, df, 5)
 
 # actions_utilisateur = {"Apple": 10, "Total": 20, "Bnp_Paribas": 5}
 # choixUtilisateur(1000, actions_utilisateur, "date")
+
+main()
