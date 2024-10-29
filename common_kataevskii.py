@@ -13,4 +13,14 @@
 #     name: python3
 # ---
 
+#%%
+import pandas as pd
 # %%
+def load_csv(name):
+    df = pd.read_csv("Apple.csv", index_col="Date")
+    df.index = pd.to_datetime(df.index, format="%m/%d/%Y")
+    df["High"] = df["High"].str.replace("$", "").astype(float)
+    df["Open"] = df["Open"].str.replace("$", "").astype(float)
+    df["Low"] = df["Low"].str.replace("$", "").astype(float)
+    df["Close/Last"] = df["Close/Last"].str.replace("$", "").astype(float)
+    return df
